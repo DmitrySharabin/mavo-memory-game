@@ -1,0 +1,441 @@
+/* Basic Styling */
+html {
+		box-sizing: border-box;
+		font-family: system-ui, Helvetica, Arial, sans-serif;
+		color: #333;
+}
+
+*,
+*::before,
+*::after {
+		box-sizing: inherit;
+}
+
+html,
+body {
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+}
+
+header {
+	padding: 2em;
+}
+
+header h1 {
+	font-weight: 400;
+	font-variant: small-caps;
+	text-align: center;
+	margin: 0;
+}
+
+.game-theme {
+	text-align: center;
+	margin: 0;
+	font-size: 1em;
+	font-weight: 300;
+}
+
+/* Styling Statistics Panel */
+.statistics {
+	text-align: center;
+	margin: 0 0 10px;
+}
+
+.moves-counter,
+.timer {
+	margin: 0 1em;
+}
+
+/* Styling star rating */
+.star-rating {
+	display: inline-flex;
+	/* Star color: fill and stroke */
+	color: currentColor;
+}
+
+/* Empty star */
+.star {
+	width: 1rem;
+	height: 1rem;
+	margin: 0 1px;
+	stroke-width: 2px;
+	stroke: currentColor;
+	fill: transparent;
+}
+
+/* Full star */
+.full {
+	fill: currentColor;
+}
+
+/* Styling Reset Button */
+.reset-button {
+	margin: 0 0 0 1em;
+	width: 1em;
+	height: 1em;
+	cursor: pointer;
+}
+
+/* Board grid */
+#game-board {
+	--theme-color: #ee7622;
+	--matched-card: #eee;
+
+	/* Remove bullets */
+	list-style-type: none;
+
+	display: grid;
+	grid-template-columns: repeat(4, minmax(70px, 1fr));
+	grid-template-rows: repeat(4, 70px);
+	grid-gap: 10px;
+	justify-content: center;
+	margin: 0 10px;
+	padding: 1.3em;
+	min-width: 335px;
+	border-radius: 0.5em;
+	box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+
+	/* Credit: https://bennettfeely.com/gradients/ */
+	background:
+		linear-gradient(
+			limegreen,
+			transparent
+		),
+		linear-gradient(
+			90deg,
+			skyblue,
+			transparent
+		),
+		linear-gradient(
+			-90deg,
+			coral,
+			transparent
+		);
+	background-blend-mode: screen;
+}
+
+/* Styling card */
+.card {
+	/*
+		Center symbol on the card vertically
+		See https://css-tricks.com/centering-css-complete-guide/
+	*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	/* Card takes all available space of the grid-cell */
+	width: 100%;
+	height: 100%;
+
+	/* The back of a card */
+	/* Source of the image: https://www.flaticon.com/free-icon/chip_897219 */
+	background: url(../img/chip.svg) center center no-repeat content-box;
+	background-blend-mode: overlay;
+	background-color: var(--theme-color);
+
+	border-radius: 2vmin;
+
+	font-size: 48px;
+	text-align: center;
+
+	/* Hide card's symbol by default */
+	color: transparent;
+
+	/* Visually show that cards are clickable */
+	cursor: pointer;
+
+}
+
+/* Styling flipped card */
+.flipped {
+	/* Visually show that flipped cards are not clickable */
+	cursor: default;
+
+	background: var(--matched-card);
+
+	/* Launch flip animation */
+	animation: flipIn 1s;
+
+	/* Make the card's symbol visible */
+	color: inherit;
+}
+
+/* Styling matched card */
+.matched {
+	/* Visually show that matched cards are not clickable */
+	cursor: default;
+
+	background: var(--matched-card);
+
+	/* Make the card's symbol visible */
+	color: inherit;
+
+	/* Launch animation that shows that guess is correct */
+	animation: correct 1s;
+}
+
+/* Styling and animating cards that have been guessed incorrectly */
+.incorrect {
+	/* Launch animation that shows that guess is incorrect */
+	animation: changeCardColor 1s steps(1, end), shake 1s, flipOut 1s 1s;
+}
+
+/* Animating cards after starting/restarting the game */
+.initial {
+	animation: flipOut 1s;
+}
+/*
+	Animate correct guess
+	Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+*/
+@keyframes correct {
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
+	10%, 20% {
+		transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+	}
+	30%, 50%, 70%, 90% {
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+	}
+	40%, 60%, 80% {
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+	}
+	100% {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+/*
+	Animate incorrect guess
+	Inspired by: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+*/
+@keyframes shake {
+	0%,
+	100% {
+		transform: translate3d(0, 0, 0);
+	}
+	10%, 30%, 50%, 70%, 90% {
+		transform: translate3d(-10px, 0, 0);
+	}
+	20%, 40%, 60%, 80% {
+		transform: translate3d(10px, 0, 0);
+	}
+}
+
+/* Make not matched cards red and show their symbols */
+@keyframes changeCardColor {
+	from {
+		background: #f00;
+		/* Fix issue in Safari: it doesn't understand color: inherit */
+		color: #fff;
+	}
+	to {
+		background: var(--theme-color);
+	}
+}
+
+/*
+	Animate a card's flip
+	Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+*/
+@keyframes flipIn {
+	0% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+		transition-timing-function: ease-in;
+	}
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+		transition-timing-function: ease-in;
+	}
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+	}
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+	}
+	100% {
+		transform: perspective(400px);
+	}
+}
+
+@keyframes flipOut {
+	0% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -90deg);
+		transition-timing-function: ease-in;
+	}
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 20deg);
+		transition-timing-function: ease-in;
+	}
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -10deg);
+	}
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 5deg);
+	}
+	100% {
+		transform: perspective(400px);
+	}
+}
+
+/* Modal window to congratulate user */
+.game-over {
+	/* Layout */
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+
+	/* Modal overlaps the whole page */
+	position: fixed;
+	width: 100vw;
+	min-width: 335px;
+	height: 100vh;
+	left: 0;
+	top: 0;
+
+	background: #fff;
+}
+
+/* Positioning elements of the modal */
+.checkmark {
+	fill: var(--theme-color);
+	width: 5em;
+	height: 5em;
+	margin-top: 20vh;
+}
+
+.congrats {
+	font-size: 2em;
+	padding: 1em 1em 0;
+	text-align: center;
+	max-width: 550px;
+	margin: 0 auto;
+}
+
+@keyframes boom {
+	50% { transform: scale(1.2); }
+}
+
+.result {
+	padding: 0 1.2em;
+	text-align: center;
+}
+
+/*
+	Button styling
+	Source: https://css-tricks.com/the-power-of-rgba/
+*/
+.play-again {
+	border: none;
+
+	border-radius: 7px;
+
+	padding: 1em 2em;
+	margin: 1em 0 0;
+
+	font-size: 1em;
+
+	background: var(--theme-color);
+	color: #fff;
+	box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.2);
+
+	text-align: center;
+
+	cursor: pointer;
+}
+
+.play-again:hover {
+	box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.6), 0 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.play-again:focus {
+	box-shadow: inset 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Styling table with attempts results */
+.attempts-stats {
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+
+.attempts-stats tr {
+	height: 2em;
+}
+
+.attempts-stats caption {
+	font-style: italic;
+	text-align: left;
+	font-size: 0.8em;
+	margin: 0 0 5px;
+}
+
+.attempts-stats caption:before {
+	content: 'Table. ';
+	font-style: normal;
+}
+
+.attempts-stats th {
+	padding: 0 3vmin 0 0;
+	border-bottom: 1px solid currentColor;
+}
+
+.attempts-stats tbody tr[mv-list-item] td:first-child::before {
+	content: "#"
+}
+
+.attempts-stats tbody tr:nth-child(even) {
+	background: #eee;
+}
+
+/* Styling Clear Results button */
+.clear-results {
+	fill: currentColor;
+	width: 1rem;
+	height: 1rem;
+	cursor: pointer;
+	float: right;
+}
+
+/* Styling footer */
+footer {
+	text-align: center;
+}
+
+footer a {
+	color: inherit;
+}
+
+/* Social Links */
+.social-links {
+	display: flex;
+	justify-content: center;
+}
+
+.social-icon {
+	margin: 0 0.7em;
+	width: 1.5em;
+	height: 1.5em;
+	fill: #333;
+}
+
+/* Make game layout responsive */
+@media (min-width: 500px) {
+	#game-board {
+		max-width: 500px;
+		margin: 0 auto;
+		grid-template-rows: repeat(4, 110px);
+	}
+
+	.card {
+		font-size: 70px;
+	}
+
+	.checkmark {
+		margin-top: 30vh;
+	}
+
+}
