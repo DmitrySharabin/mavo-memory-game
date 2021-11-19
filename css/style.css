@@ -2,7 +2,7 @@
 html {
 		box-sizing: border-box;
 		font-family: system-ui, Helvetica, Arial, sans-serif;
-		color: #333;
+		color: hsl(0 0% 20%);
 }
 
 *,
@@ -13,131 +13,109 @@ html {
 
 html,
 body {
-		width: 100vw;
-		height: 100vh;
+		inline-size: 100vw;
+		block-size: 100vh;
 		margin: 0;
 		padding: 0;
 }
 
 header {
 	padding: 2em;
-}
-
-header h1 {
-	font-weight: 400;
-	font-variant: small-caps;
 	text-align: center;
-	margin: 0;
 }
 
-.game-theme {
-	text-align: center;
-	margin: 0;
-	font-size: 1em;
-	font-weight: 300;
-}
+	header h1 {
+		margin: 0;
+		font-weight: 400;
+		font-variant: small-caps;
+	}
 
-/* Styling Statistics Panel */
-.statistics {
+	header h2 {
+		margin: 0;
+		font-size: 1em;
+		font-weight: 300;
+	}
+
+[mv-app="gameState"] {
 	--icon-faded: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity=".3"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
 	--icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
 
-	text-align: center;
-	margin: 0 0 10px;
+	min-block-size: 2em;
+	max-inline-size: 500px;
+	margin: 0 auto 0.8em;
+	display: flex;
+	gap: 1.5em;
+	justify-content: center;
+	align-items: center;
 }
 
-.moves-counter,
-.timer {
-	margin: 0 1em;
-}
+	[mv-app="gameState"]>* {
+		inline-size: 6em;
+	}
 
-/* Credit to Lea Verou: https://twitter.com/LeaVerou/status/1449514764221272064 and https://codepen.io/leaverou/pen/abydReB */
-.statistics meter {
-	display: inline-block;
-	width: 3em;
-	font-size: 130%;
-	background: var(--icon-faded) 0 / auto 100%;
-}
+	/* Credit to Lea Verou: https://twitter.com/LeaVerou/status/1449514764221272064 and https://codepen.io/leaverou/pen/abydReB */
+	[mv-app="gameState"] meter {
+		display: inline-block;
+		inline-size: 3em;
+		margin-inline: 3em 1em;
+		font-size: 130%;
+		background: var(--icon-faded) 0 / auto 100%;
+		}
 
-.statistics meter::-webkit-meter-inner-element {
-	display: block;
-	/* Override Chrome's display: grid */
-}
+	[mv-app="gameState"] meter::-webkit-meter-inner-element {
+		display: block;
+	}
 
-.statistics meter::-webkit-meter-bar {
-	border: none;
-	background: transparent;
-}
+	[mv-app="gameState"] meter::-webkit-meter-bar {
+		border: none;
+		background: transparent;
+	}
 
-.statistics meter::-webkit-meter-optimum-value {
-	background: var(--icon) 0 / auto 100%;
-}
+	[mv-app="gameState"] meter::-webkit-meter-optimum-value {
+		background: var(--icon) 0 / auto 100%;
+	}
 
-.statistics meter::-moz-meter-bar {
-	background: var(--icon) 0 / auto 100%;
-}
+	[mv-app="gameState"] meter::-moz-meter-bar {
+		background: var(--icon) 0 / auto 100%;
+	}
 
-/* Styling Reset Button */
-.reset-button {
-	margin: 0 0 0 1em;
-	width: 1em;
-	height: 1em;
-	cursor: pointer;
-}
+	/* Reset Game button */
+	[mv-app="gameState"] >svg {
+		block-size: 1em;
+		padding-inline-end: 4em;
+		cursor: pointer;
+	}
 
-/* Board grid */
 #game-board {
 	--theme-color: #ee7622;
 	--matched-card: #eee;
-
-	/* Remove bullets */
-	list-style-type: none;
 
 	display: grid;
 	grid-template-columns: repeat(4, minmax(70px, 1fr));
 	grid-template-rows: repeat(4, 70px);
 	grid-gap: 10px;
 	justify-content: center;
-	margin: 0 10px;
+
+	margin: 0 auto;
 	padding: 1.3em;
-	min-width: 335px;
+	min-inline-size: 335px;
+
 	border-radius: 0.5em;
-	box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 0px 0px 15px 0px hsl(0 0% 20% / 0.75);
+	list-style-type: none;
 
 	/* Credit: https://bennettfeely.com/gradients/ */
 	background:
-		linear-gradient(
-			limegreen,
-			transparent
-		),
-		linear-gradient(
-			90deg,
-			skyblue,
-			transparent
-		),
-		linear-gradient(
-			-90deg,
-			coral,
-			transparent
-		);
+		linear-gradient(limegreen, transparent),
+		linear-gradient(90deg, skyblue, transparent),
+		linear-gradient(-90deg, coral, transparent);
 	background-blend-mode: screen;
 }
 
-/* Styling card */
 .card {
-	/*
-		Center symbol on the card vertically
-		See https://css-tricks.com/centering-css-complete-guide/
-	*/
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	display: grid;
+	place-items: center;
 
-	/* Card takes all available space of the grid-cell */
-	width: 100%;
-	height: 100%;
-
-	/* The back of a card */
 	/* Source of the image: https://www.flaticon.com/free-icon/chip_897219 */
 	background: url(../img/chip.svg) center center no-repeat content-box;
 	background-blend-mode: overlay;
@@ -146,78 +124,171 @@ header h1 {
 	border-radius: 2vmin;
 
 	font-size: 48px;
-	text-align: center;
-
 	/* Hide card's symbol by default */
 	color: transparent;
-
-	/* Visually show that cards are clickable */
 	cursor: pointer;
-
 }
 
-/* Styling flipped card */
 .flipped {
-	/* Visually show that flipped cards are not clickable */
-	cursor: default;
-
+	color: initial;
 	background: var(--matched-card);
-
-	/* Launch flip animation */
 	animation: flipIn 1s;
-
-	/* Make the card's symbol visible */
-	color: inherit;
-}
-
-/* Styling matched card */
-.matched {
-	/* Visually show that matched cards are not clickable */
 	cursor: default;
-
-	background: var(--matched-card);
-
-	/* Make the card's symbol visible */
-	color: inherit;
-
-	/* Launch animation that shows that guess is correct */
-	animation: correct 1s;
 }
 
-/* Styling and animating cards that have been guessed incorrectly */
+.matched {
+	color: initial;
+	background: var(--matched-card);
+	animation: correct 1s;
+	cursor: default;
+}
+
 .incorrect {
-	/* Launch animation that shows that guess is incorrect */
-	animation: changeCardColor 1s steps(1, end), shake 1s, flipOut 1s 1s;
+	animation: changeCardColor 1s steps(1, end),
+	shake 1s,
+	flipOut 1s 1s;
 }
 
 /* Animating cards after starting/restarting the game */
 .initial {
 	animation: flipOut 1s;
 }
+
+
+#game-over {
+	min-inline-size: 335px;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	position: fixed;
+	inset: 0;
+	background: #fff;
+}
+
+	#game-over>svg {
+		fill: var(--theme-color);
+		inline-size: 5em;
+		block-size: 5em;
+		margin-top: 20vh;
+	}
+
+	#game-over>h2 {
+		font-size: 2em;
+		padding: 1em 1em 0;
+		max-inline-size: 550px;
+		margin: 0 auto;
+	}
+
+	#game-over>p {
+		padding: 0 1.2em;
+		text-align: center;
+	}
+
+	#game-over>button {
+		padding: 1em 2em;
+		margin: 1em 0 0;
+		font-size: 1em;
+		color: #fff;
+		background: var(--theme-color);
+		border: none;
+		border-radius: 7px;
+		box-shadow: inset 0 -4px 0 0 hsl(0 0% 0% / 0.2);
+		cursor: pointer;
+	}
+
+		#game-over>button:hover {
+			box-shadow: inset 0 -4px 0 0 hsl(0 0% 0% /0.6), 0 0 8px 0 hsl(0 0% 0% / 0.5);
+		}
+
+		#game-over>button:focus {
+			box-shadow: inset 0 3px 5px 0 hsl(0 0% 0% / 0.2);
+		}
+
+[mv-app="stats"] {
+	margin: 3em auto;
+	border-collapse: collapse;
+}
+
+	[mv-app="stats"] caption {
+		margin: 0 0 5px;
+		font-style: italic;
+		text-align: left;
+		font-size: 0.8em;
+	}
+
+	[mv-app="stats"] caption::before {
+		content: 'Table. ';
+		font-style: normal;
+	}
+
+	[mv-app="stats"] th {
+		padding: 0 3vmin 0 0;
+		border-bottom: 1px solid currentColor;
+	}
+
+	[mv-app="stats"] tr {
+		block-size: 2em;
+	}
+
+	[mv-app="stats"] tbody tr[mv-list-item] td:first-child::before {
+		content: "#"
+	}
+
+	[mv-app="stats"] tbody tr:nth-child(even) {
+		background: hsl(0 0% 93%);
+	}
+
+	/* Clear Results button */
+	[mv-app="stats"] svg {
+		fill: currentColor;
+		inline-size: 1rem;
+		block-size: 1rem;
+		cursor: pointer;
+		float: right;
+	}
+
+		[mv-app="stats"] svg:hover {
+			fill: red;
+		}
+
+footer {
+	text-align: center;
+}
+
+	footer a {
+		color: inherit;
+	}
+
+/* Animations */
 /*
-	Animate correct guess
+	Correct guess
 	Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
 */
 @keyframes correct {
 	0% {
 		transform: scale3d(1, 1, 1);
 	}
-	10%, 20% {
+	10%,
+	20% {
 		transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
 	}
-	30%, 50%, 70%, 90% {
+	30%,
+	50%,
+	70%,
+	90% {
 		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
 	}
-	40%, 60%, 80% {
+	40%,
+	60%,
+	80% {
 		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
 	}
 	100% {
 		transform: scale3d(1, 1, 1);
 	}
 }
-
 /*
-	Animate incorrect guess
+	Incorrect guess
 	Inspired by: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
 */
 @keyframes shake {
@@ -225,20 +296,26 @@ header h1 {
 	100% {
 		transform: translate3d(0, 0, 0);
 	}
-	10%, 30%, 50%, 70%, 90% {
-		transform: translate3d(-10px, 0, 0);
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+	transform: translate3d(-10px, 0, 0);
 	}
-	20%, 40%, 60%, 80% {
-		transform: translate3d(10px, 0, 0);
+	20%,
+	40%,
+	60%,
+	80% {
+	transform: translate3d(10px, 0, 0);
 	}
 }
 
 /* Make not matched cards red and show their symbols */
 @keyframes changeCardColor {
 	from {
-		background: #f00;
-		/* Fix issue in Safari: it doesn't understand color: inherit */
-		color: #fff;
+		color: initial;
+		background: red;
 	}
 	to {
 		background: var(--theme-color);
@@ -246,7 +323,7 @@ header h1 {
 }
 
 /*
-	Animate a card's flip
+	Card's flip
 	Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
 */
 @keyframes flipIn {
@@ -288,138 +365,16 @@ header h1 {
 		transform: perspective(400px);
 	}
 }
-
-/* Modal window to congratulate user */
-.game-over {
-	/* Layout */
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-
-	/* Modal overlaps the whole page */
-	position: fixed;
-	width: 100vw;
-	min-width: 335px;
-	height: 100vh;
-	left: 0;
-	top: 0;
-
-	background: #fff;
-}
-
-/* Positioning elements of the modal */
-.checkmark {
-	fill: var(--theme-color);
-	width: 5em;
-	height: 5em;
-	margin-top: 20vh;
-}
-
-.congrats {
-	font-size: 2em;
-	padding: 1em 1em 0;
-	text-align: center;
-	max-width: 550px;
-	margin: 0 auto;
-}
-
 @keyframes boom {
-	50% { transform: scale(1.2); }
-}
-
-.result {
-	padding: 0 1.2em;
-	text-align: center;
-}
-
-/*
-	Button styling
-	Source: https://css-tricks.com/the-power-of-rgba/
-*/
-.play-again {
-	border: none;
-
-	border-radius: 7px;
-
-	padding: 1em 2em;
-	margin: 1em 0 0;
-
-	font-size: 1em;
-
-	background: var(--theme-color);
-	color: #fff;
-	box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.2);
-
-	text-align: center;
-
-	cursor: pointer;
-}
-
-.play-again:hover {
-	box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.6), 0 0 8px 0 rgba(0, 0, 0, 0.5);
-}
-
-.play-again:focus {
-	box-shadow: inset 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Styling table with attempts results */
-.attempts-stats {
-	margin: 20px auto;
-	border-collapse: collapse;
-}
-
-.attempts-stats tr {
-	height: 2em;
-}
-
-.attempts-stats caption {
-	font-style: italic;
-	text-align: left;
-	font-size: 0.8em;
-	margin: 0 0 5px;
-}
-
-.attempts-stats caption:before {
-	content: 'Table. ';
-	font-style: normal;
-}
-
-.attempts-stats th {
-	padding: 0 3vmin 0 0;
-	border-bottom: 1px solid currentColor;
-}
-
-.attempts-stats tbody tr[mv-list-item] td:first-child::before {
-	content: "#"
-}
-
-.attempts-stats tbody tr:nth-child(even) {
-	background: #eee;
-}
-
-/* Styling Clear Results button */
-.clear-results {
-	fill: currentColor;
-	width: 1rem;
-	height: 1rem;
-	cursor: pointer;
-	float: right;
-}
-
-/* Styling footer */
-footer {
-	text-align: center;
-}
-
-footer a {
-	color: inherit;
+	50% {
+		transform: scale(1.2);
+	}
 }
 
 /* Make game layout responsive */
 @media (min-width: 500px) {
 	#game-board {
-		max-width: 500px;
+		max-inline-size: 500px;
 		margin: 0 auto;
 		grid-template-rows: repeat(4, 110px);
 	}
@@ -428,8 +383,7 @@ footer a {
 		font-size: 70px;
 	}
 
-	.checkmark {
+	#game-over>svg {
 		margin-top: 30vh;
 	}
-
 }

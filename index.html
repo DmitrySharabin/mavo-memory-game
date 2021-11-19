@@ -18,26 +18,26 @@
 <body>
 	<header mv-app>
 		<h1>Memory Game</h1>
-		<h2 class="game-theme">
+		<h2>
 			theme “<span mv-value="get(game.gameTheme, 'name')">emoji</span>”
 		</h2>
 	</header>
 
 	<main>
 		<!-- Statistics Panel -->
+		<section mv-app="gameState">
 			<meter value="[game.rating]" max="3"></meter>
 
-			<span class="moves-counter" mv-value="[pluralize(game.move, 'move', 'moves')]">0 moves</span>
+			<div id="moves-counter" mv-value="[pluralize(game.move, 'move', 'moves')]">0 moves</div>
 
-			<span class="timer" mv-value="if(game.gameStarted = true, game.timer, '00:00')">00:00</span>
+			<div id="timer" mv-value="if(game.gameStarted = true, game.timer, '00:00')">00:00</div>
 
-			<svg class="reset-button"
-				mv-action="
-					set(get(game.card, 'state'), initial)
-					set(game.themeNumber, random(0, count(game.theme) - 1))
-					set(game.move, 0)
-					set(game.gameStarted, false)
-				">
+			<svg mv-action="
+				set(get(game.card, 'state'), initial)
+				set(game.themeNumber, random(0, count(game.theme) - 1))
+				set(game.move, 0)
+				set(game.gameStarted, false)
+			">
 				<title>Reset Game</title>
 				<use xlink:href="#icon-reset" />
 			</svg>
@@ -92,10 +92,10 @@
 			</ul>
 		</section>
 
-		<table class="attempts-stats" mv-app="stats" mv-storage="local" mv-autosave mv-mode="read">
+		<table mv-app="stats" mv-storage="local" mv-autosave mv-mode="read">
 			<caption>
 				Attempts Results
-				<svg class="clear-results" mv-action="clear(attempts)">
+				<svg mv-action="clear(attempts)">
 					<title>Clear Results</title>
 					<use xlink:href="#icon-bin" />
 				</svg>
@@ -131,29 +131,28 @@
 	</footer>
 
 	<!-- Modal window with the result of the game -->
-	<div class="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.gameOver, visible, hidden)];">
+	<div id="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.gameOver, visible, hidden)];">
 		<meta property="attempt" content="[last(stats.attempts)]" />
 		<meta property="moves" content="[get(attempt, 'moves')]" />
 		<meta property="stars" content="[get(attempt, 'stars')]" />
 		<meta property="time" content="[get(attempt, 'time')]" />
 
-		<svg class="checkmark">
+		<svg>
 			<use xlink:href="#icon-checkmark" />
 		</svg>
-		<h1 class="congrats">Congratulations! You Won!</h1>
-		<p class="result">
+		<h2>Congratulations! You Won!</h2>
+		<p>
 			You made [pluralize(moves, "move", "moves")]
 			and earned [if(stars = 0, "no stars", pluralize(stars, "star", "stars"))].
 			It took you [time] min.
 		</p>
 
-		<button class="play-again"
-			mv-action="
-				set(game.card.state, initial)
-				set(game.themeNumber, random(0, count(game.theme) - 1))
-				set(game.move, 0)
-				set(game.gameStarted, false)
-			">Play again!</button>
+		<button mv-action="
+			set(game.card.state, initial)
+			set(game.themeNumber, random(0, count(game.theme) - 1))
+			set(game.move, 0)
+			set(game.gameStarted, false)
+		">Play again!</button>
 	</div>
 
 	<!--
