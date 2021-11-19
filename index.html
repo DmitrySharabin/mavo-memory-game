@@ -91,7 +91,7 @@
 
 						if(move mod 2 = 1, set(firstCard, symbol) & set(filter($all, state.$all = incorrect).state, initial))
 
-						addif(isGameOver, group(moves: move, stars: rating, time: '00:56'), stats.attempts)
+						addif(count(state.$all = matched) = count($all), group(moves: move, stars: rating, time: '00:56'), stats.attempts)
 					">
 					<meta property="state" mv-default="initial" />
 					<span property="symbol"></span>
