@@ -169,11 +169,21 @@
 
 	<!-- Modal window with the result of the game -->
 	<div class="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.gameOver, visible, hidden)];">
+		<meta property="attempt" content="[last(stats.attempts)]" />
+		<meta property="moves" content="[get(attempt, 'moves')]" />
+		<meta property="stars" content="[get(attempt, 'stars')]" />
+		<meta property="time" content="[get(attempt, 'time')]" />
+
 		<svg class="checkmark">
 			<use xlink:href="#icon-checkmark" />
 		</svg>
 		<h1 class="congrats">Congratulations! You Won!</h1>
-		<p class="result"></p>
+		<p class="result">
+			You made [pluralize(moves, "move", "moves")]
+			and earned [if(stars = 0, "no stars", pluralize(stars, "star", "stars"))].
+			It took you [time] min.
+		</p>
+
 		<button class="play-again"
 			mv-action="
 				set(game.card.state, initial)
