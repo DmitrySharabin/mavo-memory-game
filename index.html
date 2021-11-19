@@ -82,14 +82,13 @@
 			<ul id="game-board" mv-list mv-value="shuffle(list(symbols, symbols))" style="--theme-color: #[color]">
 				<li mv-list-item class="card [state]"
 					mv-action="
+						setif(count(state.$all = incorrect) > 0, filter($all, state.$all = incorrect).state, initial)
 						setif(state != flipped and state != matched, move, move + 1)
 						setif(state != matched, state, flipped)
 
 						if(move mod 2 = 0 and symbol = firstCard, set(filter($all, state.$all = flipped).state, matched))
 						if(move mod 2 = 0 and symbol != firstCard, set(filter($all, state.$all = flipped).state, incorrect))
-						if(move mod 2 = 0, set(firstCard, '☠️'))
-
-						if(move mod 2 = 1, set(firstCard, symbol) & set(filter($all, state.$all = incorrect).state, initial))
+						if(move mod 2 = 0, set(firstCard, '☠️'), set(firstCard, symbol))
 
 						addif(count(state.$all = matched) = count($all), group(moves: move, stars: rating, time: '00:56'), stats.attempts)
 					">
