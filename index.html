@@ -83,7 +83,7 @@
 			<meta property="seconds" content="[seconds($now - startTime) mod 60]" />
 			<meta property="timer" content="[if(minutes < 10, 0 & minutes, minutes)]:[if(seconds < 10, 0 & seconds, seconds)]" />
 
-			<meta property="isGameOver" content="[count(card where state = matched) = count(card)]" />
+			<meta property="gameOver" content="[count(card where state = matched) = count(card)]" />
 
 			<meta property="firstCard" content="☠️" />
 
@@ -168,7 +168,7 @@
 	</footer>
 
 	<!-- Modal window with the result of the game -->
-	<div class="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.isGameOver, visible, hidden)];">
+	<div class="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.gameOver, visible, hidden)];">
 		<svg class="checkmark">
 			<use xlink:href="#icon-checkmark" />
 		</svg>
