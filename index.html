@@ -85,11 +85,11 @@
 						setif(state != flipped and state != matched, move, move + 1)
 						setif(state != matched, state, flipped)
 
-						if(move mod 2 = 0 and symbol = firstCard, set($all.state where filter($all, $all.state = flipped), matched))
-						if(move mod 2 = 0 and symbol != firstCard, set($all.state where filter($all, $all.state = flipped), incorrect))
+						if(move mod 2 = 0 and symbol = firstCard, set(state.$all where filter($all, state.$all = flipped), matched))
+						if(move mod 2 = 0 and symbol != firstCard, set(state.$all where filter($all, state.$all = flipped), incorrect))
 						if(move mod 2 = 0, set(firstCard, '☠️'))
 
-						if(move mod 2 = 1, set(firstCard, symbol) & set($all.state where filter($all, $all.state = incorrect), initial))
+						if(move mod 2 = 1, set(firstCard, symbol) & set(state.$all where filter($all, state.$all = incorrect), initial))
 
 						addif(isGameOver, group(moves: move, stars: rating, time: '00:56'), stats.attempts)
 					">
