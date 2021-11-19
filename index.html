@@ -28,13 +28,10 @@
 		<section class="statistics" mv-app>
 			<meter value="[game.rating]" max="3"></meter>
 
-			<!-- Moves counter -->
 			<span class="moves-counter" mv-value="[pluralize(game.move, 'move', 'moves')]">0 moves</span>
 
-			<!-- Timer -->
 			<span class="timer" mv-value="if(game.gameStarted = true, game.timer, '00:00')">00:00</span>
 
-			<!-- Reset Game button -->
 			<svg class="reset-button"
 				mv-action="
 					set(get(game.card, 'state'), initial)
@@ -96,7 +93,6 @@
 			</ul>
 		</section>
 
-		<!-- Attempts statistics -->
 		<table class="attempts-stats" mv-app="stats" mv-storage="local" mv-autosave mv-mode="read">
 			<caption>
 				Attempts Results
