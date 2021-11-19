@@ -39,6 +39,9 @@ header h1 {
 
 /* Styling Statistics Panel */
 .statistics {
+	--icon-faded: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity=".3"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
+	--icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
+
 	text-align: center;
 	margin: 0 0 10px;
 }
@@ -48,26 +51,30 @@ header h1 {
 	margin: 0 1em;
 }
 
-/* Styling star rating */
-.star-rating {
-	display: inline-flex;
-	/* Star color: fill and stroke */
-	color: currentColor;
+/* Credit to Lea Verou: https://twitter.com/LeaVerou/status/1449514764221272064 and https://codepen.io/leaverou/pen/abydReB */
+.statistics meter {
+	display: inline-block;
+	width: 3em;
+	font-size: 130%;
+	background: var(--icon-faded) 0 / auto 100%;
 }
 
-/* Empty star */
-.star {
-	width: 1rem;
-	height: 1rem;
-	margin: 0 1px;
-	stroke-width: 2px;
-	stroke: currentColor;
-	fill: transparent;
+.statistics meter::-webkit-meter-inner-element {
+	display: block;
+	/* Override Chrome's display: grid */
 }
 
-/* Full star */
-.full {
-	fill: currentColor;
+.statistics meter::-webkit-meter-bar {
+	border: none;
+	background: transparent;
+}
+
+.statistics meter::-webkit-meter-optimum-value {
+	background: var(--icon) 0 / auto 100%;
+}
+
+.statistics meter::-moz-meter-bar {
+	background: var(--icon) 0 / auto 100%;
 }
 
 /* Styling Reset Button */
