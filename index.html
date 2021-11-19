@@ -25,7 +25,7 @@
 
 	<main>
 		<!-- Statistics Panel -->
-			<meter value="[game.rating]" max="5"></meter>
+			<meter value="[game.rating]" max="3"></meter>
 
 			<span class="moves-counter" mv-value="[pluralize(game.move, 'move', 'moves')]">0 moves</span>
 
@@ -60,8 +60,7 @@
 
 			<!-- Game state -->
 			<meta property="move" content="0" />
-			<meta property="rating"
-				content="[if(move < 17, 5, if(move < 21, 4, if(move < 25, 3, if(move < 29, 2, if(move < 33, 1, 0)))))]" />
+			<meta property="rating" content="[if(move < 19, 3, if(move < 26, 2, if(move < 32, 1, 0)))]" />
 			<meta property="gameStarted" />
 			<meta property="startTime" mv-default="[$now]" />
 			<meta property="gameOver" content="[count(card where state = matched) = count(card)]" />
