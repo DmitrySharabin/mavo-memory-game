@@ -409,19 +409,6 @@ footer a {
 	color: inherit;
 }
 
-/* Social Links */
-.social-links {
-	display: flex;
-	justify-content: center;
-}
-
-.social-icon {
-	margin: 0 0.7em;
-	width: 1.5em;
-	height: 1.5em;
-	fill: #333;
-}
-
 /* Make game layout responsive */
 @media (min-width: 500px) {
 	#game-board {
