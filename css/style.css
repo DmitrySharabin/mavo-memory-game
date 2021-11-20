@@ -121,7 +121,7 @@ header {
 	background-blend-mode: overlay;
 	background-color: var(--theme-color);
 
-	border-radius: 2vmin;
+	border-radius: 0.2em;
 
 	font-size: 48px;
 	/* Hide card's symbol by default */
@@ -222,7 +222,7 @@ header {
 	}
 
 	[mv-app="stats"] th {
-		padding: 0 3vmin 0 0;
+		padding: 0 1.5em 0 0;
 		border-bottom: 1px solid currentColor;
 	}
 
