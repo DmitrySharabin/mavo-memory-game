@@ -3,16 +3,15 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="author" content="Dmitry Sharabin" />
-	<meta name="description" content="Udacity. Front-End Web Developer Nanodegree Program. Project #2" />
 	<meta name="keywords" content="HTML,CSS,Udacity,Nanodegree,Mavo" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
 	<!-- Mavo -->
-	<link rel="stylesheet prefetch" href="https://get.mavo.io/mavo.css">
+	<link rel="stylesheet prefetch" href="https://get.mavo.io/mavo.css" />
 	<script src="https://get.mavo.io/mavo.js"></script>
 
-	<link rel="stylesheet prefetch" href="css/style.css">
+	<link rel="stylesheet prefetch" href="css/style.css" />
 	<title>Memory Game</title>
 </head>
 <body>
@@ -24,7 +23,6 @@
 	</header>
 
 	<main>
-		<!-- Statistics Panel -->
 		<section mv-app="gameState">
 			<meter value="[game.rating]" max="3"></meter>
 
@@ -46,11 +44,14 @@
 		<section mv-app="game" mv-mode="read" mv-bar="none">
 			<!-- Themes -->
 			<meta property="theme"
-				content="[group(name: animals, symbols: list('🐶', '🐱', '🐭', '🐹', '🐻', '🐼', '🐵', '🐯'), color: '60b3f1')]" mv-group />
+				content="[group(name: animals, symbols: list('🐶', '🐱', '🐭', '🐹', '🐻', '🐼', '🐵', '🐯'), color: '#60b3f1')]"
+				mv-group />
 			<meta property="theme"
-				content="[group(name: emoji, symbols: list('😇', '😍', '😂', '😎', '😘', '😱', '😳', '😉'), color: 'ee7622')]" mv-group />
+				content="[group(name: emoji, symbols: list('😇', '😍', '😂', '😎', '😘', '😱', '😳', '😉'), color: '#ee7622')]"
+				mv-group />
 			<meta property="theme"
-				content="[group(name: flora, symbols: list('🌵', '🌲', '🌴', '🌿', '🍁', '🌷', '🌺', '🌾'), color: '4dc774')]" mv-group />
+				content="[group(name: flora, symbols: list('🌵', '🌲', '🌴', '🌿', '🍁', '🌷', '🌺', '🌾'), color: '#4dc774')]"
+				mv-group />
 
 			<!-- Settings -->
 			<meta property="themeNumber" content="[random(0, count(theme) - 1)]" />
@@ -69,9 +70,9 @@
 			<meta property="seconds" content="[seconds($now - startTime) mod 60]" />
 			<meta property="timer" content="[if(minutes < 10, 0 & minutes, minutes)]:[if(seconds < 10, 0 & seconds, seconds)]" />
 
-			<meta property="firstCard" content="☠️" />
+			<meta property="firstCard" content="©" />
 
-			<ul id="game-board" mv-list mv-value="shuffle(list(symbols, symbols))" style="--theme-color: #[color]">
+			<ul id="game-board" mv-list mv-value="shuffle(list(symbols, symbols))" style="--theme-color: [color]">
 				<li mv-list-item class="card [state]"
 					mv-action="
 						if(move = 0, set(gameStarted, true) & set(startTime, time($now, 'ms')))
@@ -82,7 +83,7 @@
 
 						if(move mod 2 = 0 and symbol = firstCard, set(filter($all, state.$all = flipped).state, matched))
 						if(move mod 2 = 0 and symbol != firstCard, set(filter($all, state.$all = flipped).state, incorrect))
-						if(move mod 2 = 0, set(firstCard, '☠️'), set(firstCard, symbol))
+						if(move mod 2 = 0, set(firstCard, '©'), set(firstCard, symbol))
 
 						addif(count(state.$all = matched) = count($all), group(moves: move, stars: rating, time: timer), stats.attempts)
 					">
@@ -127,7 +128,7 @@
 	</footer>
 
 	<!-- Modal window with the result of the game -->
-	<div id="game-over" mv-app style="--theme-color: #[game.color]; visibility: [if(game.gameOver, visible, hidden)];">
+	<div id="game-over" mv-app style="--theme-color: [game.color]; visibility: [if(game.gameOver, visible, hidden)];">
 		<meta property="attempt" content="[last(stats.attempts)]" />
 		<meta property="moves" content="[get(attempt, 'moves')]" />
 		<meta property="stars" content="[get(attempt, 'stars')]" />
