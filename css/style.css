@@ -328,7 +328,7 @@ footer {
 @keyframes changeCardColor {
 	from {
 		color: initial;
-		background: red;
+		background: hsl(0 100% 65%);
 	}
 	to {
 		background: var(--theme-color);
