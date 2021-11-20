@@ -248,7 +248,7 @@ header {
 	}
 
 		[mv-app="stats"] svg:hover {
-			fill: red;
+			fill: crimson;
 		}
 
 footer {
