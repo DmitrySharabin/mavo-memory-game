@@ -259,18 +259,15 @@ footer {
 	transform-origin: 0 0;
 	padding: .4em 3em;
 	background: hsl(350 80% 55%);
-	text-decoration: none;
+	text-align: center;
+	line-height: 1.15;
 	color: hsl(41 61% 90%);
 	box-shadow: 0 0.1em 0 0.1em hsl(0 0% 0% / 0.15);
 }
 
-	footer a {
-		color: inherit;
+	footer img:not(:hover) {
+		filter: grayscale(100%) brightness(400%);
 	}
-
-		footer a:not(:hover) {
-			text-decoration: none;
-		}
 
 /* Animations */
 /*
