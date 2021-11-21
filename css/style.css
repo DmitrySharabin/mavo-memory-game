@@ -210,14 +210,15 @@ header {
 }
 
 	[mv-app="stats"] caption {
-		margin: 0 0 5px;
+		margin: 0 0 0.3em;
 		font-style: italic;
 		text-align: left;
-		font-size: 0.8em;
+		line-height: 1.85;
+		font-size: 0.82em;
 	}
 
 	[mv-app="stats"] caption::before {
-		content: 'Table. ';
+		content: "Table. ";
 		font-style: normal;
 	}
 
@@ -240,15 +241,19 @@ header {
 
 	/* Clear Results button */
 	[mv-app="stats"] svg {
-		fill: currentColor;
-		inline-size: 1rem;
-		block-size: 1rem;
-		cursor: pointer;
+		fill: hsl(0 0% 30%);
+		inline-size: 1.5rem;
+		block-size: 1.5rem;
+		margin-inline-start: auto;
+		padding: 0.35em;
+		margin-inline-end: -0.35em;
+		border-radius: 0.35em;
 		float: right;
+		cursor: pointer;
 	}
 
 		[mv-app="stats"] svg:hover {
-			fill: crimson;
+			background-color: hsl(0 0% 90%);
 		}
 
 footer {
