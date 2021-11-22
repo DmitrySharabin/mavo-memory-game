@@ -19,7 +19,7 @@
 	<header mv-app>
 		<h1>Memory Game</h1>
 		<h2>
-			theme “<span mv-value="get(game.gameTheme, 'name')">emoji</span>”
+			theme “<span mv-value="lowercase(get(game.gameTheme, 'name'))">emoji</span>”
 		</h2>
 	</header>
 
@@ -33,7 +33,7 @@
 
 			<svg mv-action="
 				set(get(game.card, 'state'), initial)
-				set(game.themeNumber, random(0, count(game.theme) - 1))
+				set(game.themeNumber, random(0, count(themes.theme) - 1))
 				set(game.move, 0)
 				set(game.gameStarted, false)
 			">
@@ -43,20 +43,9 @@
 		</section>
 
 		<section mv-app="game" mv-mode="read" mv-bar="none">
-			<!-- Themes -->
-			<meta property="theme"
-				content="[group(name: animals, symbols: list('🐶', '🐱', '🐭', '🐹', '🐻', '🐼', '🐵', '🐯'), color: '#60b3f1')]"
-				mv-group />
-			<meta property="theme"
-				content="[group(name: emoji, symbols: list('😇', '😍', '😂', '😎', '😘', '😱', '😳', '😉'), color: '#ee7622')]"
-				mv-group />
-			<meta property="theme"
-				content="[group(name: flora, symbols: list('🌵', '🌲', '🌴', '🌿', '🍁', '🌷', '🌺', '🌾'), color: '#4dc774')]"
-				mv-group />
-
 			<!-- Settings -->
-			<meta property="themeNumber" content="[random(0, count(theme) - 1)]" />
-			<meta property="gameTheme" content="[get(theme, themeNumber)]" />
+			<meta property="themeNumber" content="[random(0, count(themes.theme) - 1)]" />
+			<meta property="gameTheme" content="[get(themes.theme, themeNumber)]" />
 			<meta property="symbols" content="[get(gameTheme, 'symbols')]" />
 			<meta property="color" content="[get(gameTheme, 'color')]" />
 
@@ -93,6 +82,27 @@
 				</li>
 			</ul>
 		</section>
+
+		<details mv-app="themes" mv-init="themes.json" mv-storage="local" mv-autosave mv-bar="with import export" mv-mode="edit">
+			<summary class="mv-bar">Themes</summary>
+
+			<ul mv-list mv-initial-items="0">
+				<li mv-list-item="theme">
+					<div class="inputs">
+						<input type="text" property="name" placeholder="Theme name" />
+						<input type="color" property="color" mv-default="#938cf2" />
+					</div>
+
+					<details class="symbols" open>
+						<summary>Symbols</summary>
+
+						<ul mv-list="symbols" mv-initial-items="8" mv-item-bar="no-delete no-add" style="--theme-color: [color]">
+							<li mv-list-item aria-label="Card symbol" mv-editor-placeholder="💩" mv-editor-maxlength="2"></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</details>
 
 		<table mv-app="stats" mv-storage="local" mv-autosave mv-mode="read">
 			<caption>
@@ -149,7 +159,7 @@
 
 		<button mv-action="
 			set(game.card.state, initial)
-			set(game.themeNumber, random(0, count(game.theme) - 1))
+			set(game.themeNumber, random(0, count(themes.theme) - 1))
 			set(game.move, 0)
 			set(game.gameStarted, false)
 		">Play again!</button>

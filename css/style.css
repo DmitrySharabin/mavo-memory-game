@@ -158,6 +158,96 @@ header {
 	animation: flipOut 1s;
 }
 
+[mv-app="themes"] {
+	--matched-card: #eee;
+
+	max-inline-size: calc(min(100%, var(--max-inline-size, 500px)) - 2em);
+	margin: 1.5em auto 0;
+}
+
+	[mv-app="themes"] summary {
+		text-transform: uppercase;
+		font-size: smaller;
+		font-weight: bold;
+		color: rgb(0 0 0 / .5);
+		cursor: default;
+	}
+
+	[mv-app="themes"] .inputs {
+		display: flex;
+		gap: .3em;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	[mv-app="themes"] :is(button, .mv-button) {
+		padding: .4em .6em;
+		border: 0;
+		margin: 0 .5em;
+		background: rgb(0 0 0 / .15);
+		font-size: smaller;
+		border-radius: .3em;
+		font-weight: bold;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+
+	[mv-app="themes"] button.mv-add-theme {
+		margin: 0;
+		margin-block-start: 1.8em;
+	}
+
+	[mv-app="themes"] button.mv-add-theme::before {
+		content: "+ ";
+	}
+
+	[mv-app="themes"] input[property] {
+		border: 1px solid rgb(0 0 0 / .2);
+		border-radius: .3em;
+		box-shadow: 0 .05em .2em rgb(0 0 0 / .2) inset;
+		background: rgba(26 26 26 / .05);
+	}
+
+	[mv-app="themes"] input[property="name"] {
+		padding: .3em .5em .2em;
+		font-size: 105%;
+	}
+
+	[mv-app="themes"] [mv-list]:where([property="theme"], [property="symbols"]) {
+		padding: 0;
+		margin-inline: 1em;
+		list-style-type: none;
+	}
+
+	[mv-app="themes"] [mv-list-item][property="theme"]+[mv-list-item][property="theme"] {
+		margin-block-start: 1.5em;
+	}
+
+	[mv-app="themes"] .symbols summary {
+		margin: .5em 0;
+	}
+
+	[mv-app="themes"] [mv-list][property="symbols"] {
+		margin: .5em auto;
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		gap: .5em;
+		text-align: center;
+	}
+
+	[mv-app="themes"] [mv-list-item][property="symbols"] input.mv-editor {
+		width: 100% !important;
+		aspect-ratio: 3 / 4;
+		border-radius: .2em;
+		background: var(--matched-card);
+		border: 1px solid var(--theme-color, hsl(0 0% 65%));
+		box-shadow: 0 1px 2px rgb(0 0 0 / 0.1), 0 1px 1px rgb(0 0 0 / 0.06);
+		font-size: 2.3em;
+	}
+
+	[mv-app="themes"] button.mv-add-symbols {
+		display: none;
+	}
 
 #game-over {
 	display: flex;
@@ -401,14 +491,27 @@ footer {
 }
 
 /* Make game layout responsive */
+@media (max-width: 375px) {
+	[mv-app="themes"] [mv-list-item][property="symbols"] input.mv-editor {
+		font-size: 2em;
+	}
+}
+
 @media (max-width: 415px) {
 	header {
 		margin-block-start: 1.5em;
 	}
 
 	[mv-app="gameState"] {
-		gap: 0.5em;
 		font-size: 85%;
+	}
+
+	[mv-app="themes"] [mv-list][property="symbols"] {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	[mv-app="themes"] [mv-list-item][property="symbols"] input.mv-editor {
+		font-size: 3em;
 	}
 
 	footer {
