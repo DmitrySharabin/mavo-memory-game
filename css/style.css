@@ -351,6 +351,11 @@ header {
 		float: right;
 	}
 
+	[mv-app="stats"] svg:hover {
+		fill: hsl(0 0% 100%);
+		background-color: crimson;
+	}
+
 footer {
 	position: absolute;
 	inset: 0;
