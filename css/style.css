@@ -1,22 +1,22 @@
 /* Basic Styling */
 html {
-		box-sizing: border-box;
-		font-family: system-ui, Helvetica, Arial, sans-serif;
-		color: hsl(0 0% 20%);
+	box-sizing: border-box;
+	font-family: system-ui, Helvetica, Arial, sans-serif;
+	color: hsl(0 0% 20%);
 }
 
 *,
 *::before,
 *::after {
-		box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 html,
 body {
-		inline-size: 100vw;
-		block-size: 100vh;
-		margin: 0;
-		padding: 0;
+	inline-size: 100vw;
+	block-size: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 header {
