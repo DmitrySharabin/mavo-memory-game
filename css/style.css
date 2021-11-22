@@ -1,5 +1,7 @@
 /* Basic Styling */
 html {
+	--max-inline-size: 500px;
+
 	box-sizing: border-box;
 	font-family: system-ui, Helvetica, Arial, sans-serif;
 	color: hsl(0 0% 20%);
@@ -45,7 +47,7 @@ header {
 	grid-gap: max(8px, 0.7em);
 	place-items: center;
 	min-block-size: 2em;
-	max-inline-size: 500px;
+	max-inline-size: var(--max-inline-size, 500px);
 	margin: 0 auto 0.8em;
 	padding: 0 1.3em;
 }
@@ -419,7 +421,7 @@ footer {
 @media (min-width: 500px) {
 	[mv-app="gameState"],
 	#game-board {
-		max-inline-size: 500px;
+		max-inline-size: var(--max-inline-size, 500px);
 	}
 
 	.card {
