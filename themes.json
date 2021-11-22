@@ -1,7 +1,7 @@
 {
 	"theme": [
 		{
-			"name": "animals",
+			"name": "Animals",
 			"color": "#60b3f1",
 			"symbols": [
 				"🐶",
@@ -15,7 +15,7 @@
 			]
 		},
 		{
-			"name": "emoji",
+			"name": "Emoji",
 			"color": "#ee7622",
 			"symbols": [
 				"😇",
@@ -29,7 +29,7 @@
 			]
 		},
 		{
-			"name": "flora",
+			"name": "Flora",
 			"color": "#4dc774",
 			"symbols": [
 				"🌵",
