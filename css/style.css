@@ -203,7 +203,7 @@ header {
 		}
 
 [mv-app="stats"] {
-	margin: 3em auto;
+	margin: 3em auto 1em;
 	border-collapse: collapse;
 }
 
