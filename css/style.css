@@ -418,7 +418,6 @@ footer {
 @media (min-width: 500px) {
 	#game-board {
 		max-inline-size: 500px;
-		margin: 0 auto;
 	}
 
 	.card {
