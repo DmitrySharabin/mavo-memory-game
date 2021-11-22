@@ -38,6 +38,19 @@ header {
 		font-weight: 300;
 	}
 
+/* Reset Game and Clear Results buttons */
+:where([mv-app="gameState"], [mv-app="stats"]) svg {
+	inline-size: 1.7em;
+	block-size: 1.7em;
+	padding: 0.35em;
+	border-radius: 0.35em;
+	cursor: pointer;
+}
+
+:where([mv-app="gameState"], [mv-app="stats"]) svg:hover {
+	background-color: hsl(0 0% 90%);
+}
+
 [mv-app="gameState"] {
 	--icon-faded: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity=".3"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
 	--icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
@@ -75,13 +88,6 @@ header {
 
 	[mv-app="gameState"] meter::-moz-meter-bar {
 		background: var(--icon) 0 / auto 100%;
-	}
-
-	/* Reset Game button */
-	[mv-app="gameState"]>svg {
-		inline-size: 1em;
-		block-size: 1em;
-		cursor: pointer;
 	}
 
 #game-board {
@@ -240,19 +246,9 @@ header {
 	/* Clear Results button */
 	[mv-app="stats"] svg {
 		fill: hsl(0 0% 30%);
-		inline-size: 1.5rem;
-		block-size: 1.5rem;
-		margin-inline-start: auto;
-		padding: 0.35em;
 		margin-inline-end: -0.35em;
-		border-radius: 0.35em;
 		float: right;
-		cursor: pointer;
 	}
-
-		[mv-app="stats"] svg:hover {
-			background-color: hsl(0 0% 90%);
-		}
 
 footer {
 	position: absolute;
