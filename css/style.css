@@ -258,17 +258,26 @@ header {
 
 footer {
 	position: absolute;
-	top: 0;
-	left: 0;
+	inset: 0;
+	inset-inline-end: initial;
+	inset-block-end: initial;
+	display: flex;
+	flex-direction: column;
+	gap: 0.1em;
+	align-items: center;
+	justify-content: center;
+	padding: .4em 4.8em;
+	font-size: 85%;
+	background: hsl(350 80% 55%);
+	color: hsl(41 61% 90%);
 	transform: rotate(90deg) translateX(70%) rotate(-90deg) rotate(-45deg) translateY(-100%);
 	transform-origin: 0 0;
-	padding: .4em 3em;
-	background: hsl(350 80% 55%);
-	text-align: center;
-	line-height: 1.15;
-	color: hsl(41 61% 90%);
 	box-shadow: 0 0.1em 0 0.1em hsl(0 0% 0% / 0.15);
 }
+
+	footer img {
+		inline-size: 3.5em;
+	}
 
 	footer img:not(:hover) {
 		filter: grayscale(100%) brightness(400%);
@@ -387,6 +396,25 @@ footer {
 }
 
 /* Make game layout responsive */
+@media (max-width: 415px) {
+	header {
+		margin-block-start: 1.5em;
+	}
+
+	footer {
+		gap: 0.3em;
+		inset-inline-end: 0;
+		padding: 0.7em 3em;
+		flex-direction: revert;
+		transform: revert;
+	}
+
+	footer a {
+		display: flex;
+		align-self: stretch;
+	}
+}
+
 @media (min-width: 500px) {
 	#game-board {
 		max-inline-size: 500px;
