@@ -128,7 +128,7 @@
 	</footer>
 
 	<!-- Modal window with the result of the game -->
-	<div id="game-over" mv-app style="--theme-color: [game.color]; visibility: [if(game.gameOver, visible, hidden)];">
+	<div id="game-over" mv-app class="[if(game.gameOver, 'game-over')]" style="--theme-color: [game.color]">
 		<meta property="attempt" content="[last(stats.attempts)]" />
 		<meta property="moves" content="[get(attempt, 'moves')]" />
 		<meta property="stars" content="[get(attempt, 'stars')]" />
@@ -137,7 +137,9 @@
 		<svg>
 			<use xlink:href="#icon-checkmark" />
 		</svg>
-		<h2>Congratulations! You Won!</h2>
+		<h2 class="[if(game.gameOver, boom)]">Congratulations!
+			You Won!
+		</h2>
 		<p>
 			You made [pluralize(moves, "move", "moves")]
 			and earned [if(stars = 0, "no stars", pluralize(stars, "star", "stars"))].

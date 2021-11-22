@@ -160,13 +160,20 @@ header {
 
 
 #game-over {
-	min-inline-size: 335px;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
 	position: fixed;
 	inset: 0;
-	background: #fff;
+	background: hsl(0 0% 97%);
+	text-align: center;
+	line-height: 1.2;
+	transition: .3s opacity;
+}
+
+#game-over:not(.game-over) {
+	visibility: hidden;
+	opacity: 0;
 }
 
 	#game-over>svg {
@@ -179,33 +186,37 @@ header {
 	#game-over>h2 {
 		font-size: 2em;
 		padding: 1em 1em 0;
-		max-inline-size: 550px;
 		margin: 0 auto;
+		white-space: pre-line;
+	}
+
+	#game-over>h2.boom {
+		animation: boom .3s .1s;
 	}
 
 	#game-over>p {
 		padding: 0 1.2em;
-		text-align: center;
 	}
 
 	#game-over>button {
 		padding: 1em 2em;
 		margin: 1em 0 0;
 		font-size: 1em;
-		color: #fff;
+		color: hsl(0 0% 100%);
 		background: var(--theme-color);
 		border: none;
-		border-radius: 7px;
-		box-shadow: inset 0 -4px 0 0 hsl(0 0% 0% / 0.2);
+		border-radius: 0.55em;
+		box-shadow: inset 0 -.3em 0 0 hsl(0 0% 0% / 0.2);
 		cursor: pointer;
 	}
 
 		#game-over>button:hover {
-			box-shadow: inset 0 -4px 0 0 hsl(0 0% 0% /0.6), 0 0 8px 0 hsl(0 0% 0% / 0.5);
+			box-shadow: inset 0 -.3em 0 0 hsl(0 0% 0% /0.6),
+			0 0 .6em 0 hsl(0 0% 0% / 0.5);
 		}
 
 		#game-over>button:focus {
-			box-shadow: inset 0 3px 5px 0 hsl(0 0% 0% / 0.2);
+			box-shadow: inset 0 .25em .35em 0 hsl(0 0% 0% / 0.2);
 		}
 
 [mv-app="stats"] {
