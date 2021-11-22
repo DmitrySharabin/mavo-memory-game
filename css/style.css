@@ -91,14 +91,12 @@ header {
 	--matched-card: #eee;
 
 	display: grid;
-	grid-template-columns: repeat(4, minmax(70px, 1fr));
-	grid-template-rows: repeat(4, 70px);
-	grid-gap: 10px;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: max(8px, 0.7em);
 	justify-content: center;
 
 	margin: 0 auto;
 	padding: 1.3em;
-	min-inline-size: 335px;
 
 	border-radius: 0.5em;
 	box-shadow: 0px 0px 15px 0px hsl(0 0% 20% / 0.75);
@@ -115,6 +113,8 @@ header {
 .card {
 	display: grid;
 	place-items: center;
+
+	aspect-ratio: 3 / 4;
 
 	/* Source of the image: https://www.flaticon.com/free-icon/chip_897219 */
 	background: url(../img/chip.svg) center center no-repeat content-box;
@@ -419,7 +419,6 @@ footer {
 	#game-board {
 		max-inline-size: 500px;
 		margin: 0 auto;
-		grid-template-rows: repeat(4, 110px);
 	}
 
 	.card {
