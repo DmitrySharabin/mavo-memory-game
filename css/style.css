@@ -40,27 +40,23 @@ header {
 	--icon-faded: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity=".3"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
 	--icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><text style="font-size:80px" y=".9em">⭐️</text></svg>');
 
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: max(8px, 0.7em);
+	place-items: center;
 	min-block-size: 2em;
 	max-inline-size: 500px;
 	margin: 0 auto 0.8em;
-	display: flex;
-	gap: 1.5em;
-	justify-content: center;
-	align-items: center;
+	padding: 0 1.3em;
 }
-
-	[mv-app="gameState"]>* {
-		inline-size: 6em;
-	}
 
 	/* Credit to Lea Verou: https://twitter.com/LeaVerou/status/1449514764221272064 and https://codepen.io/leaverou/pen/abydReB */
 	[mv-app="gameState"] meter {
 		display: inline-block;
 		inline-size: 3em;
-		margin-inline: 3em 1em;
 		font-size: 130%;
 		background: var(--icon-faded) 0 / auto 100%;
-		}
+	}
 
 	[mv-app="gameState"] meter::-webkit-meter-inner-element {
 		display: block;
@@ -80,9 +76,9 @@ header {
 	}
 
 	/* Reset Game button */
-	[mv-app="gameState"] >svg {
+	[mv-app="gameState"]>svg {
+		inline-size: 1em;
 		block-size: 1em;
-		padding-inline-end: 4em;
 		cursor: pointer;
 	}
 
@@ -401,6 +397,11 @@ footer {
 		margin-block-start: 1.5em;
 	}
 
+	[mv-app="gameState"] {
+		gap: 0.5em;
+		font-size: 85%;
+	}
+
 	footer {
 		gap: 0.3em;
 		inset-inline-end: 0;
@@ -416,6 +417,7 @@ footer {
 }
 
 @media (min-width: 500px) {
+	[mv-app="gameState"],
 	#game-board {
 		max-inline-size: 500px;
 	}
