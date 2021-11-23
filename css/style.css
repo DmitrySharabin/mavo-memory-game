@@ -131,6 +131,8 @@ header {
 	/* Hide card's symbol by default */
 	color: transparent;
 	cursor: pointer;
+
+	animation: flipOut 1s;
 }
 
 .flipped {
@@ -151,11 +153,6 @@ header {
 	animation: changeCardColor 1s steps(1, end),
 	shake 1s,
 	flipOut 1s 1s;
-}
-
-/* Animating cards after starting/restarting the game */
-.initial {
-	animation: flipOut 1s;
 }
 
 [mv-app="themes"] {

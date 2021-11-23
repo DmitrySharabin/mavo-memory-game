@@ -32,7 +32,7 @@
 			<div id="timer" mv-value="if(game.gameStarted = true, game.timer, '00:00')">00:00</div>
 
 			<svg mv-action="
-				set(get(game.card, 'state'), initial)
+				set(game.card.state, '')
 				set(game.themeNumber, random(0, count(themes.theme) - 1))
 				set(game.move, 0)
 				set(game.gameStarted, false)
@@ -67,7 +67,7 @@
 					mv-action="
 						if(move = 0, set(gameStarted, true) & set(startTime, time($now, 'ms')))
 
-						setif(count(state.$all = incorrect) > 0, filter($all, state.$all = incorrect).state, initial)
+						setif(count(state.$all = incorrect) > 0, filter($all, state.$all = incorrect).state, '')
 						setif(state != flipped and state != matched, move, move + 1)
 						setif(state != matched, state, flipped)
 
@@ -77,7 +77,7 @@
 
 						addif(count(state.$all = matched) = count($all), group(moves: move, stars: rating, time: timer), stats.attempts)
 					">
-					<meta property="state" mv-default="initial" />
+					<meta property="state" />
 					<span property="symbol"></span>
 				</li>
 			</ul>
@@ -158,7 +158,7 @@
 		</p>
 
 		<button mv-action="
-			set(game.card.state, initial)
+			set(game.card.state, '')
 			set(game.themeNumber, random(0, count(themes.theme) - 1))
 			set(game.move, 0)
 			set(game.gameStarted, false)
