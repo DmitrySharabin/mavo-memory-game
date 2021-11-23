@@ -6,7 +6,7 @@ For more information see this [article](https://en.wikipedia.org/wiki/Concentrat
 
 ## How the Game Works
 
-The game board consists of sixteen “cards” arranged in a grid. The deck is made up of eight different pairs of cards, each with different symbols on one side. The game supports three different sets of symbols — themes: _emoji_, _flora_, _animals_.
+The game board consists of sixteen “cards” arranged in a grid. The deck is made up of eight different pairs of cards, each with different symbols on one side. Out of the box, the game supports three different sets of symbols — built-in themes: _emoji_, _flora_, _animals_.
 
 The cards are arranged randomly on the grid with the symbol face down.
 
@@ -16,7 +16,7 @@ The gameplay rules are very simple: flip over two hidden cards at a time to loca
 
 ## Interface
 
-![Game Interface](screenshots/interface.png)
+![Game Interface](screenshots/interface-2.png)
 
 ### Game State Panel
 
@@ -33,6 +33,11 @@ Parts of the _State Panel_ (left to right):
 
 ![Game Board](screenshots/board.png)
 
+### Themes
+
+You can **add** your own themes, **export** and share them with your friends, or **import** someone else's themes.
+
+![Themes](screenshots/themes.png)
 ### Attempts Results Table
 
 The game stores the results of a user's attempts using browser's local storage.
