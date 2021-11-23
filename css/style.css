@@ -186,6 +186,8 @@ header {
 		border-radius: .3em;
 		font-weight: bold;
 		text-transform: uppercase;
+		text-decoration: none;
+		color: inherit;
 		cursor: pointer;
 	}
 
