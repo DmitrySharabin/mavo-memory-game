@@ -177,7 +177,7 @@ header {
 		align-items: center;
 	}
 
-	[mv-app="themes"] :is(button, .mv-button) {
+	[mv-app="themes"] :where(.mv-bar, [mv-list][property="theme"], [mv-list-item="theme"]) :is(button, .mv-button) {
 		padding: .4em .6em;
 		border: 0;
 		margin: 0 .5em;
