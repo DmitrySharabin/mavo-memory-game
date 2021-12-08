@@ -47,8 +47,12 @@ header {
 	cursor: pointer;
 }
 
-:where([mv-app="gameState"], [mv-app="stats"]) svg:hover {
+[mv-app="gameState"] svg:hover {
 	background-color: hsl(0 0% 90%);
+}
+
+[mv-app="gameState"] svg:active {
+	background-color: hsl(0 0% 80%);
 }
 
 [mv-app="gameState"] {
@@ -353,6 +357,10 @@ header {
 	[mv-app="stats"] svg:hover {
 		fill: hsl(0 0% 100%);
 		background-color: crimson;
+	}
+
+	[mv-app="stats"] svg:active {
+		background-color: hsl(348 83% 35%);
 	}
 
 footer {
