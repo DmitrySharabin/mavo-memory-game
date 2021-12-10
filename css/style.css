@@ -368,6 +368,7 @@ footer {
 	inset: 0;
 	inset-inline-end: initial;
 	inset-block-end: initial;
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 0.1em;
