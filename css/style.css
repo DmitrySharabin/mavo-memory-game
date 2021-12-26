@@ -2,6 +2,9 @@
 html {
 	--max-inline-size: 500px;
 
+	--delay: .4s;
+	--duration: .7s;
+
 	box-sizing: border-box;
 	font-family: system-ui, Helvetica, Arial, sans-serif;
 	color: hsl(0 0% 20%);
@@ -97,6 +100,7 @@ header {
 #game-board {
 	--theme-color: #ee7622;
 	--matched-card: #eee;
+	--incorrect-card: hsl(0 100% 65%);
 
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -146,17 +150,33 @@ header {
 	cursor: default;
 }
 
-.matched {
+:is(.matched-first, .matched-second) {
 	color: initial;
 	background: var(--matched-card);
-	animation: correct 1s;
 	cursor: default;
 }
 
-.incorrect {
-	animation: changeCardColor 1s steps(1, end),
-	shake 1s,
-	flipOut 1s 1s;
+.matched-first {
+	animation: correct var(--duration) var(--delay, 0);
+}
+
+.matched-second {
+	animation:
+		flipIn .8s,
+		correct var(--duration) var(--delay, 0);
+}
+
+.incorrect-first {
+	animation:
+		changeCardColor var(--duration) var(--delay, 0) steps(1, end),
+		shake var(--duration) var(--delay, 0);
+}
+
+.incorrect-second {
+	animation:
+		flipIn .8s,
+		changeCardColor var(--duration) var(--delay, 0) steps(1, end),
+		shake var(--duration) var(--delay, 0);
 }
 
 [mv-app="themes"] {
@@ -261,7 +281,7 @@ header {
 	background: hsl(0 0% 97%);
 	text-align: center;
 	line-height: 1.2;
-	transition: .3s opacity;
+	transition: .3s opacity calc(var(--duration, 0) + var(--delay, 0));
 }
 
 #game-over:not(.game-over) {
@@ -284,7 +304,7 @@ header {
 	}
 
 	#game-over>h2.boom {
-		animation: boom .3s .1s;
+		animation: boom .3s calc(var(--duration, 0) + var(--delay, 0) + .1s);
 	}
 
 	#game-over>p {
@@ -447,10 +467,7 @@ footer {
 @keyframes changeCardColor {
 	from {
 		color: initial;
-		background: hsl(0 100% 65%);
-	}
-	to {
-		background: var(--theme-color);
+		background: var(--incorrect-card);
 	}
 }
 
@@ -507,6 +524,10 @@ footer {
 @media (max-width: 375px) {
 	[mv-app="themes"] [mv-list-item][property="symbols"] input.mv-editor {
 		font-size: 2em;
+	}
+
+	[mv-app="stats"] {
+		font-size: 80%;
 	}
 }
 

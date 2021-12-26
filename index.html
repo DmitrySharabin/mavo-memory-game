@@ -32,6 +32,7 @@
 			<div id="timer" mv-value="if(game.gameStarted = true, game.timer, '00:00')">00:00</div>
 
 			<svg mv-action="
+				set(game.card.flipped, false)
 				set(game.card.state, '')
 				set(game.themeNumber, random(0, count(themes.theme) - 1))
 				set(game.move, 0)
@@ -54,7 +55,7 @@
 			<meta property="rating" content="[if(move < 19, 3, if(move < 26, 2, if(move < 32, 1, 0)))]" />
 			<meta property="gameStarted" />
 			<meta property="startTime" />
-			<meta property="gameOver" content="[count(card where state = matched) = count(card)]" />
+			<meta property="gameOver" content="[count(card where starts(state, 'matched-')) = count(card)]" />
 
 			<meta property="minutes" content="[minutes($now - startTime) mod 60]" />
 			<meta property="seconds" content="[seconds($now - startTime) mod 60]" />
@@ -63,21 +64,26 @@
 			<meta property="firstCard" content="©" />
 
 			<ul id="game-board" mv-list mv-value="shuffle(list(symbols, symbols))" style="--theme-color: [color]">
-				<li mv-list-item class="card [state]"
+				<li mv-list-item class="card [if(flipped, 'flipped')] [state]"
 					mv-action="
 						if(move = 0, set(gameStarted, true) & set(startTime, time($now, 'ms')))
 
-						setif(count(state.$all = incorrect) > 0, filter($all, state.$all = incorrect).state, '')
-						setif(state != flipped and state != matched, move, move + 1)
-						setif(state != matched, state, flipped)
+						setif(move mod 2 = 0 and !starts(state, 'incorrect-') and count(starts(state.$all, 'incorrect-')) > 0, filter($all, starts(state.$all, 'incorrect-')).state, '')
+						setif(move mod 2 = 0 and !starts(state, 'incorrect-') and !starts(state, 'matched-') and count(flipped.$all) > 0, flipped.$all, false)
 
-						if(move mod 2 = 0 and symbol = firstCard, set(filter($all, state.$all = flipped).state, matched))
-						if(move mod 2 = 0 and symbol != firstCard, set(filter($all, state.$all = flipped).state, incorrect))
-						if(move mod 2 = 0, set(firstCard, '©'), set(firstCard, symbol))
+						setif(!flipped and !starts(state, 'incorrect-') and !starts(state, 'matched-'), move, move + 1)
+						setif(!flipped and !starts(state, 'matched-'), flipped, true)
 
-						addif(count(state.$all = matched) = count($all), group(moves: move, stars: rating, time: timer), stats.attempts)
+						if(move mod 2 = 0 and symbol = firstCard, set(filter($all, flipped.$all).state, 'matched-first') & set(state, 'matched-second'))
+						if(move mod 2 = 0 and firstCard != '©' and symbol != firstCard, set(filter($all, flipped.$all).state, 'incorrect-first') & set(state, 'incorrect-second'))
+
+						setif(move mod 2 = 0, firstCard, '©')
+						setif(move mod 2 = 1 and !starts(state, 'matched-'), firstCard, symbol)
+
+						addif(count(starts(state.$all, 'matched-')) = count($all), group(theme: get(gameTheme, 'name'), moves: move, stars: rating, time: timer), stats.attempts)
 					">
 					<meta property="state" />
+					<meta property="flipped" datatype="boolean" content="false" />
 					<span property="symbol"></span>
 				</li>
 			</ul>
@@ -115,6 +121,7 @@
 			<thead>
 				<tr>
 					<th>Attempt</th>
+					<th>Theme</th>
 					<th>Moves</th>
 					<th>Stars</th>
 					<th>Time</th>
@@ -122,10 +129,11 @@
 			</thead>
 			<tbody mv-list="attempts" mv-initial-items="0">
 				<tr mv-if="count(attempts) = 0">
-					<td colspan="4">There are no attempts yet!</td>
+					<td colspan="5">There are no attempts yet!</td>
 				</tr>
 				<tr mv-list-item>
 					<td mv-value="$index + 1">1</td>
+					<td property="theme">emoji</td>
 					<td property="moves">16</td>
 					<td property="stars">3</td>
 					<td property="time">00:35</td>
@@ -158,6 +166,7 @@
 		</p>
 
 		<button mv-action="
+			set(game.card.flipped, false)
 			set(game.card.state, '')
 			set(game.themeNumber, random(0, count(themes.theme) - 1))
 			set(game.move, 0)
