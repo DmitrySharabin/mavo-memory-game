@@ -38,6 +38,7 @@ Parts of the _State Panel_ (left to right):
 You can **add** your own themes, **export** and share them with your friends, or **import** someone else's themes.
 
 ![Themes](screenshots/themes.png)
+
 ### Attempts Results Table
 
 The game stores the results of a user's attempts using browser's local storage.
