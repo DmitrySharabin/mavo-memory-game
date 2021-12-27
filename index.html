@@ -63,7 +63,7 @@
 
 			<meta property="firstCard" content="©" />
 
-			<ul id="game-board" mv-list mv-initial-items="16" mv-value="shuffle(list(symbols, symbols))" style="--theme-color: [color]">
+			<ul id="game-board" mv-list mv-value="shuffle(list(symbols, symbols))" style="--theme-color: [color]">
 				<li mv-list-item class="card [if(flipped, 'flipped')] [state]"
 					mv-action="
 						if(move = 0, set(gameStarted, true) & set(startTime, time($now, 'ms')))
