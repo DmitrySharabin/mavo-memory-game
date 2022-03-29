@@ -122,6 +122,11 @@ header {
 	background-blend-mode: screen;
 }
 
+	#game-board [property="symbol"] {
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
 .card {
 	display: grid;
 	place-items: center;
