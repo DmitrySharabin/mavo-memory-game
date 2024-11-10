@@ -31,7 +31,7 @@ header {
 	padding: 2em;
 	text-align: center;
 
-	&:not(:hover, :focus) svg {
+	&:not(:hover, :focus-within) svg {
 		display: none;
 	}
 
@@ -63,13 +63,35 @@ header {
 			}
 		}
 
-		svg {
+		button {
+			display: flex;
+			padding: .2em;
 			position: absolute;
 			inset-inline-end: 0;
 			translate: calc(100% + .1em) 0;
-			padding: .25em;
-			color: inherit;
-			stroke-width: 5;
+			border: none;
+			border-radius: 0.35em;
+			background: inherit;
+
+			&:where(:hover, :focus) {
+				background-color: hsl(0 0% 90%);
+			}
+
+			&:active {
+				background-color: hsl(0 0% 80%);
+			}
+
+			&:focus-visible {
+				outline: 2px dotted var(--theme-color, currentColor);
+				outline-offset: .07em;
+			}
+
+			svg {
+				place-self: center;
+				padding: 0;
+				color: inherit;
+				stroke-width: 5;
+			}
 		}
 	}
 }

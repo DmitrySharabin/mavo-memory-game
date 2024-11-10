@@ -16,7 +16,7 @@
 	<title>Memory Game</title>
 </head>
 <body>
-	<header mv-app="header">
+	<header mv-app="header" style="--theme-color: [game.color || 'initial']">
 		<h1>Memory Game</h1>
 		<h2>
 			<select
@@ -29,13 +29,12 @@
 					set(game.gameStarted, false)
 					set(game.symbols, shuffle(game.symbols))
 				"
-				style="--theme-color: [game.color || 'initial']"
 			>
 				<optgroup label="Themes" mv-list mv-value="themes.theme">
 					<option value="[$index]" mv-group>[name]</option>
 				</optgroup>
 			</select>
-			<svg mv-action="
+			<button mv-action="
 				set(game.card.flipped, false)
 				set(game.card.state, '')
 				set(game.move, 0)
@@ -43,9 +42,11 @@
 				set(themeNumber, random(0, count(themes.theme) - 1))
 				set(game.symbols, shuffle(game.symbols))
 			">
-				<title>Random Theme</title>
-				<use xlink:href="#icon-shuffle" />
-			</svg>
+				<svg>
+					<title>Random Theme</title>
+					<use xlink:href="#icon-shuffle" />
+				</svg>
+			</button>
 		</h2>
 	</header>
 
