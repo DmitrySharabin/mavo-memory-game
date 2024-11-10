@@ -9,17 +9,32 @@
 
 	<!-- Mavo -->
 	<link rel="stylesheet prefetch" href="https://get.mavo.io/mavo.min.css" />
-	<script src="https://get.mavo.io/mavo.es5.min.js"></script>
+	<script src="https://get.mavo.io/mavo.min.js"></script>
 
 	<link rel="stylesheet prefetch" href="css/style.css" />
 	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧠</text></svg>' />
 	<title>Memory Game</title>
 </head>
 <body>
-	<header mv-app>
+	<header mv-app="header">
 		<h1>Memory Game</h1>
 		<h2>
-			theme “<span mv-value="lowercase(get(game.gameTheme, 'name'))">emoji</span>”
+			theme
+			<select
+				property="themeNumber"
+				title="Choose a theme to play"
+				mv-action="
+					set(game.card.flipped, false)
+					set(game.card.state, '')
+					set(game.move, 0)
+					set(game.gameStarted, false)
+					set(game.symbols, shuffle(game.symbols))
+				"
+			>
+				<optgroup label="Themes" mv-list mv-value="themes.theme">
+					<option value="[$index]" mv-group>[name]</option>
+				</optgroup>
+			</select>
 		</h2>
 	</header>
 
@@ -34,9 +49,9 @@
 			<svg mv-action="
 				set(game.card.flipped, false)
 				set(game.card.state, '')
-				set(game.themeNumber, random(0, count(themes.theme) - 1))
 				set(game.move, 0)
 				set(game.gameStarted, false)
+				set(game.symbols, shuffle(game.symbols))
 			">
 				<title>Reset Game</title>
 				<use xlink:href="#icon-reset" />
@@ -45,7 +60,7 @@
 
 		<section mv-app="game" mv-mode="read">
 			<!-- Settings -->
-			<meta property="themeNumber" content="[random(0, count(themes.theme) - 1)]" />
+			<meta property="themeNumber" content="[header.themeNumber || 0]" />
 			<meta property="gameTheme" content="[get(themes.theme, themeNumber)]" />
 			<meta property="symbols" content="[get(gameTheme, 'symbols')]" />
 			<meta property="color" content="[get(gameTheme, 'color')]" />
@@ -143,7 +158,7 @@
 	</main>
 
 	<footer>
-			Made with <a href="https://mavo.io"><img src="https://mavo.io/logo.svg" alt="Mavo logo" /></a>
+		Made with <a href="https://mavo.io"><img src="https://mavo.io/logo.svg" alt="Mavo logo" /></a>
 	</footer>
 
 	<!-- Modal window with the result of the game -->
@@ -168,9 +183,10 @@
 		<button mv-action="
 			set(game.card.flipped, false)
 			set(game.card.state, '')
-			set(game.themeNumber, random(0, count(themes.theme) - 1))
 			set(game.move, 0)
 			set(game.gameStarted, false)
+			set(game.symbols, shuffle(game.symbols))
+			set(header.themeNumber, random(0, count(themes.theme) - 1))
 		">Play again!</button>
 	</div>
 

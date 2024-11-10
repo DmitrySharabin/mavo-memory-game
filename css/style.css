@@ -35,10 +35,20 @@ header {
 		font-variant: small-caps;
 	}
 
-	header h2 {
-		margin: 0;
-		font-size: 1em;
-		font-weight: 300;
+	header {
+		h2 {
+			margin: 0;
+			font-size: 1em;
+			font-weight: 300;
+
+			select {
+				font: inherit;
+				color: inherit;
+				background: inherit;
+				border: none;
+				field-sizing: content;
+			}
+		}
 	}
 
 /* Reset Game and Clear Results buttons */
