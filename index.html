@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  data-stretchy-filter="select[property]">
+<html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<meta name="author" content="Dmitry Sharabin" />
@@ -230,5 +230,14 @@
 			</symbol>
 		</defs>
 	</svg>
+
+	<script>
+		if (!CSS.supports("field-sizing", "content")) {
+			// Polyfill for `field-sizing: content`. Stretchy is globally available thanks to Mavo.
+			// Caution: Weird behavior in Safari.
+			Stretchy.selectors.filter = "select[property]";
+			Stretchy.init();
+		}
+	</script>
 </body>
 </html>
