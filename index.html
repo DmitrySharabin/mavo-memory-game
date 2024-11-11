@@ -11,6 +11,10 @@
 	<link rel="stylesheet prefetch" href="https://get.mavo.io/mavo.min.css" />
 	<script src="https://get.mavo.io/mavo.min.js"></script>
 
+	<!-- Shoelace -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/themes/light.css" />
+	<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/shoelace-autoloader.js"></script>
+
 	<link rel="stylesheet prefetch" href="css/style.css" />
 	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧠</text></svg>' />
 	<title>Memory Game</title>
@@ -19,21 +23,23 @@
 	<header mv-app="header" style="--theme-color: [game.color || 'initial']">
 		<h1>Memory Game</h1>
 		<h2>
-			<select
-				property="themeNumber"
-				title="Choose a theme to play"
-				mv-action="
-					set(game.card.flipped, false)
-					set(game.card.state, '')
-					set(game.move, 0)
-					set(game.gameStarted, false)
-					set(game.symbols, shuffle(game.symbols))
-				"
-			>
-				<optgroup label="Themes" mv-list mv-value="themes.theme">
-					<option value="[$index]" mv-group>[name]</option>
-				</optgroup>
-			</select>
+			<meta property="themeNumber" mv-default="[random(0, count(themes.theme) - 1)]" mv-mode="read" />
+			<sl-dropdown class="theme-picker">
+				<sl-button slot="trigger" caret mv-value="get(game.gameTheme, 'name')">Emoji</sl-button>
+				<sl-menu mv-list mv-value="themes.theme">
+					<sl-menu-item
+						value="[$index]"
+						mv-group
+						mv-action="if(themeNumber != $index,
+							set(game.card.flipped, false) &
+							set(game.card.state, '') &
+							set(game.move, 0) &
+							set(game.gameStarted, false) &
+							set(themeNumber, $index) &
+							set(game.symbols, shuffle(game.symbols))
+						)">[name]</sl-menu-item>
+				</sl-menu>
+			</sl-dropdown>
 			<button mv-action="
 				set(game.card.flipped, false)
 				set(game.card.state, '')
@@ -230,14 +236,5 @@
 			</symbol>
 		</defs>
 	</svg>
-
-	<script>
-		if (!CSS.supports("field-sizing", "content")) {
-			// Polyfill for `field-sizing: content`. Stretchy is globally available thanks to Mavo.
-			// Caution: Weird behavior in Safari.
-			Stretchy.selectors.filter = "select[property]";
-			Stretchy.init();
-		}
-	</script>
 </body>
 </html>

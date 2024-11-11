@@ -49,17 +49,25 @@ header {
 		font-size: 1.2em;
 		font-weight: 300;
 
-		select {
-			font: inherit;
-			font-weight: 900;
-			color: var(--theme-color, inherit);
-			background: inherit;
-			border: none;
-			field-sizing: content;
+		.theme-picker {
+			sl-button::part(base) {
+				font-weight: 900;
+				font-size: 1.1em;
+				color: var(--theme-color, inherit);
+				border: none;
+			}
 
-			&:focus-visible {
+			sl-button::part(base):hover {
+				background-color: color-mix(in oklab, var(--theme-color) 10%, transparent 90%)
+			}
+
+			sl-button::part(base):focus-visible {
 				outline: 2px dotted var(--theme-color, currentColor);
 				outline-offset: .07em;
+			}
+
+			sl-button::part(label) {
+				padding-inline-end: .1em;
 			}
 		}
 
