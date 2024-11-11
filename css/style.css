@@ -69,6 +69,10 @@ header {
 			sl-button::part(label) {
 				padding-inline-end: .1em;
 			}
+
+			sl-menu-item {
+				text-align: left;
+			}
 		}
 
 		button {

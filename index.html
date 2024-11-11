@@ -30,7 +30,9 @@
 			<sl-dropdown class="theme-picker">
 				<sl-button slot="trigger" caret mv-value="get(game.gameTheme, 'name')">Emoji</sl-button>
 				<sl-menu mv-list mv-value="themes.theme">
+					<sl-menu-label>Themes</sl-menu-label>
 					<sl-menu-item
+						mv-list-item
 						value="[$index]"
 						mv-group
 						mv-action="if(themeNumber != $index,
@@ -40,7 +42,10 @@
 							set(game.gameStarted, false) &
 							set(themeNumber, $index) &
 							set(game.symbols, shuffle(game.symbols))
-						)">[name]</sl-menu-item>
+						)">
+						[name]
+						<span slot="prefix" mv-value="get(get(themes.theme, $index).symbols, random(0, 7))">🧠</span>
+					</sl-menu-item>
 				</sl-menu>
 			</sl-dropdown>
 			<button mv-action="
