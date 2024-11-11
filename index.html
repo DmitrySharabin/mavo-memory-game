@@ -15,6 +15,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/themes/light.css" />
 	<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/shoelace-autoloader.js"></script>
 
+	<!-- NudeUI -->
+	<script src="https://nudeui.com/elements/meter-discrete/meter-discrete.js" type="module"></script>
+
 	<link rel="stylesheet prefetch" href="css/style.css" />
 	<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧠</text></svg>' />
 	<title>Memory Game</title>
@@ -58,7 +61,7 @@
 
 	<main>
 		<section mv-app="gameState">
-			<meter value="[game.rating]" max="3"></meter>
+			<meter-discrete value="[game.rating]" max="3"></meter-discrete>
 
 			<div id="moves-counter" mv-value="[pluralize(game.move, 'move', 'moves')]">0 moves</div>
 

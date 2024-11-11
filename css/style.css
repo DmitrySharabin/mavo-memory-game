@@ -135,31 +135,6 @@ header {
 	padding: 0 1.3em;
 }
 
-/* Credit to Lea Verou: https://twitter.com/LeaVerou/status/1449514764221272064 and https://codepen.io/leaverou/pen/abydReB */
-[mv-app="gameState"] meter {
-	display: inline-block;
-	inline-size: 3em;
-	font-size: 130%;
-	background: var(--icon-faded) 0 / auto 100%;
-}
-
-[mv-app="gameState"] meter::-webkit-meter-inner-element {
-	display: block;
-}
-
-[mv-app="gameState"] meter::-webkit-meter-bar {
-	border: none;
-	background: transparent;
-}
-
-[mv-app="gameState"] meter::-webkit-meter-optimum-value {
-	background: var(--icon) 0 / auto 100%;
-}
-
-[mv-app="gameState"] meter::-moz-meter-bar {
-	background: var(--icon) 0 / auto 100%;
-}
-
 #game-board {
 	--theme-color: #ee7622;
 	--matched-card: #eee;
